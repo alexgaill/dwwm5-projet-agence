@@ -19,6 +19,7 @@ class Role
 
     /**
      * @ORM\Column(type="string", length=20)
+     * @Assert\NotBlank
      */
     private $role;
 

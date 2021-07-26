@@ -24,6 +24,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
+     * @Assert\Email
      */
     private $email;
 
@@ -40,16 +41,20 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * @ORM\Column(type="string", length=65)
+     * @Assert\Regex("/^\w+/")
      */
     private $firstname;
 
     /**
      * @ORM\Column(type="string", length=65)
+     * @Assert\Regex
      */
     private $lastname;
 
     /**
      * @ORM\Column(type="string", length=15)
+     * @Assert\Regex("/^\+|[0-9]+/")
+     * @Assert\NotBlank
      */
     private $phone;
 

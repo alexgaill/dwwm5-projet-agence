@@ -19,6 +19,8 @@ class Options
 
     /**
      * @ORM\Column(type="string", length=30)
+     * @Assert\Regex("/^\w+/")
+     * @Assert\NotBlank
      */
     private $name;
 

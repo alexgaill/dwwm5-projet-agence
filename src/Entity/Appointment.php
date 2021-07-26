@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\AppointmentRepository;
+use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -25,6 +26,9 @@ class Appointment
 
     /**
      * @ORM\Column(type="datetime")
+     * @Assert\DateTime
+     * @Assert\NotBlank
+     * 
      */
     private $appointmentDate;
 
@@ -36,21 +40,31 @@ class Appointment
 
     /**
      * @ORM\Column(type="string", length=120)
+     * @Assert\Email(
+     *      message=" L'email {{ value }} n'est pas au format valide pour un email."
+     * )
+     * 
      */
     private $email;
 
     /**
      * @ORM\Column(type="string", length=15)
+     * @Assert\Regex("/^\+|[0-9]+/")
+     * @Assert\NotBlank
      */
     private $phone;
 
     /**
      * @ORM\Column(type="string", length=65)
+     * @Assert\Regex("/^\w+/")
+     * @Assert\NotBlank
      */
     private $firstname;
 
     /**
      * @ORM\Column(type="string", length=65)
+     * @Assert\Regex("/^\w+/")
+     * @Assert\NotBlank
      */
     private $lastname;
 

@@ -21,51 +21,66 @@ class Property
 
     /**
      * @ORM\Column(type="string", length=120)
+     * @Assert\NotBlank
      */
     private $title;
 
     /**
      * @ORM\Column(type="integer")
+     * @Assert\Positive
      */
     private $surface;
 
     /**
      * @ORM\Column(type="text", nullable=true)
+     * @Assert\NotBlank(
+     *  allowNull=true
+     * )
      */
     private $content;
 
     /**
      * @ORM\Column(type="integer")
+     * @Assert\Positive
      */
     private $price;
 
     /**
      * @ORM\Column(type="integer")
+     * @Assert\Positive
      */
     private $rooms;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Assert\Positive
+     * @Assert\IsNull
      */
     private $floor;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank
      */
     private $address;
 
     /**
      * @ORM\Column(type="string", length=15)
+     * @Assert\NotBlank
+     * @Assert\regex(("/^\[A-Z0-9]/"))
      */
     private $zipcode;
 
     /**
      * @ORM\Column(type="string", length=100)
+     * @Assert\Regex("/^\w+/")
+     * @Assert\NotBlank
      */
     private $city;
 
     /**
      * @ORM\Column(type="string", length=50)
+     * @Assert\NotNull
      */
     private $type;
 
@@ -76,11 +91,13 @@ class Property
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Assert\Positive
      */
     private $groundSize;
 
     /**
      * @ORM\Column(type="date", nullable=true)
+     * @Assert\Date
      */
     private $dateOfConstruction;
 
@@ -91,6 +108,7 @@ class Property
 
     /**
      * @ORM\Column(type="string", length=150)
+     * @Assert\NotBlank
      */
     private $slug;
 
