@@ -422,4 +422,12 @@ class Property
 
         return $this;
     }
+
+    /**
+     * @return string
+     */
+    public function getSubContent () :string
+    {
+        return substr($this->content, 0, 100) . "...";
+    }
 }

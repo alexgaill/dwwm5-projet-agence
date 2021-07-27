@@ -24,8 +24,13 @@ class PropertyRepository extends ServiceEntityRepository
      */
     public function findLast5()
     {
+            // SELECT * FROM property
         return $this->createQueryBuilder('p')
+            // WHERE sell = false
+            ->andWhere("p.sell = false")
+            // ORDER BY id DESC
             ->orderBy('p.id', 'DESC')
+            // LIMIT 5
             ->setMaxResults(5)
             ->getQuery()
             ->getResult()
