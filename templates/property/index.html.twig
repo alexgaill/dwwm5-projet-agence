@@ -2,14 +2,14 @@
 
 
 {% block main %}
-	<div class="mt-5 ml-2 row">
-		<div class="col-9">
+	<div class="ms-3 row">
+		<div class="col-8 pt-5 border-end border-dark">
 			<h1>Bienvenue sur le site de notre Agence</h1>
 			<h2 class="h5">Retrouvez tous les biens près de chez vous au meilleur prix</h2>
-			<div class="mt-3">
+			<div class="mt-3 row wrap">
             {% for property in properties %}
-				<div class="card" style="width: 10rem;">
-					<img src="https://wwww.fakeimg.pl" class="card-img-top" alt="{{property.title}}">
+				<div class="card m-3" style="width: 18rem;">
+					<img src="https://fakeimg.pl/300/" class="card-img-top" alt="{{property.title}}">
 					<div class="card-body">
 						<h5 class="card-title">{{property.title}}</h5>
 						<p class="card-text">{{property.content}}</p>
@@ -22,7 +22,7 @@
 			</div>
 		</div>
 		<div class="col-3">
-            <div class="border-bottom border-start border-dark ps-2">
+            <div class="border-bottom border-dark ps-2 pt-5">
                 <h2 class="h6">Notre agence:</h2>
                 <address>
                     Vous pouvez nous retrouver<br>
@@ -34,7 +34,7 @@
                     par téléphone: <a href="tel:+33612345678">+33 6 12 34 56 78</a>
                 </address>
             </div>
-            <div class="ps-2 pt-2 border-start border-dark">
+            <div class="ps-2 pt-2">
                 <p><a href="#">Appartement</a></p>
                 <p><a href="#">Maison</a></p>
                 <p><a href="#">Achat</a></p>

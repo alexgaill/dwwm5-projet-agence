@@ -129,6 +129,12 @@ class Property
      */
     private $options;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="properties")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $employee;
+
     public function __construct()
     {
         $this->appointments = new ArrayCollection();
@@ -401,6 +407,18 @@ class Property
     public function removeOption(Options $option): self
     {
         $this->options->removeElement($option);
+
+        return $this;
+    }
+
+    public function getEmployee(): ?User
+    {
+        return $this->employee;
+    }
+
+    public function setEmployee(?User $employee): self
+    {
+        $this->employee = $employee;
 
         return $this;
     }
