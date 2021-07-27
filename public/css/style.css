@@ -3,3 +3,9 @@
     top:0 !important;
     right:0 !important;
 }
+a.nav-link {
+    color:white !important;
+}
+/* nav{
+    z-index: 2;
+} */
