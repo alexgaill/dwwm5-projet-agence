@@ -38,9 +38,40 @@ class PropertyRepository extends ServiceEntityRepository
     }
 
     
-    // public function findOneBySomeField($criteria): ?Property
-    // {
-    //     $qb =$this->createQueryBuilder('p');
-    // }
+    public function findFilterProperties($criteria = [])
+    {
+        $qb = $this->createQueryBuilder('p');
+
+        // $qb->where() // SELECT * FROM ... WHERE ...=...
+        // $qb->andWhere() // SELECT * FROM ... WHERE ...=.. AND ...=...
+        // $qb->orWhere() // SELECT * FROM ... WHERE ...=.. OR ...=...
+
+        if (array_key_exists("roomsMin", $criteria) && !empty($criteria["roomsMin"])) {
+            $qb->andWhere($qb->expr()->gte('p.rooms', $criteria["roomsMin"]));
+        }
+        if (array_key_exists("roomsMax", $criteria) && !empty($criteria["roomsMax"])) {
+            $qb->andWhere($qb->expr()->lte('p.rooms', $criteria["roomsMax"]));
+        }
+        if (array_key_exists("surfaceMin", $criteria) && !empty($criteria["surfaceMin"])) {
+            $qb->andWhere($qb->expr()->gte('p.surface', $criteria["surfaceMin"]));
+        }
+        if (array_key_exists("surfaceMax", $criteria) && !empty($criteria["surfaceMax"])) {
+            $qb->andWhere($qb->expr()->lte('p.surface', $criteria["surfaceMax"]));
+        }
+        if (array_key_exists("priceMin", $criteria) && !empty($criteria["priceMin"])) {
+            $qb->andWhere($qb->expr()->gte('p.price', $criteria["priceMin"]));
+        }
+        if (array_key_exists("priceMax", $criteria) && !empty($criteria["priceMax"])) {
+            $qb->andWhere($qb->expr()->lte('p.price', $criteria["priceMax"]));
+        }
+        if (array_key_exists("sort", $criteria) && !empty($criteria["sort"])) {
+            if (array_key_exists("direction", $criteria) && !empty($criteria["direction"])) {
+                $qb->orderBy($criteria["sort"], $criteria["direction"]);
+            } else {
+                $qb->orderBy($criteria["sort"], "ASC");
+            }
+        }
+        return $qb->getQuery()->getResult();
+    }
     
 }

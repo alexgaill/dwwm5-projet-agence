@@ -5,7 +5,51 @@
 {% block main %}
 	<div class="container">
 		<h1 class="mt-5 text-center">Retrouvez tous nos biens disponible ici</h1>
-		<div id="filters"></div>
+		<div id="filters">
+			<form action="{{ path('properties')}}" method="get">
+				<table class="table">
+					<thead>
+						<tr>
+							<th>
+								<label for="roomsMin">Pièces min</label>
+							</th>
+							<th>
+								<label for="roomsMax">Pièces max</label>
+							</th>
+							<th>
+								<label for="surfaceMin">Surface min</label>
+							</th>
+							<th>
+								<label for="surfaceMax">Surface max</label>
+							</th>
+							<th>
+								<label for="priceMin">Prix min</label>
+							</th>
+							<th>
+								<label for="priceMax">Prix max</label>
+							</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>
+                            <input type="number" name="roomsMin" id="roomsMin" value="{{ filter.roomsMin }}">
+                            </td>
+							<td><input type="number" name="roomsMax" id="roomsMax" value="{{ filter.roomsMax }}"></td>
+							<td><input type="number" name="surfaceMin" id="surfaceMin" value="{{ filter.surfaceMin }}"></td>
+							<td><input type="number" name="surfaceMax" id="surfaceMax" value="{{ filter.surfaceMax }}"></td>
+							<td><input type="number" name="priceMin" id="priceMin" value="{{ filter.priceMin }}"></td>
+							<td><input type="number" name="priceMax" id="priceMax" value="{{ filter.priceMax }}"></td>
+						</tr>
+						<tr>
+							<td colspan="6" class="text-center">
+								<button class="btn btn-primary">Rechercher</button>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</form>
+		</div>
 		<div class="mt-3">
 			<div class="count">
 				<p class="h6">Nombre de biens disponibles:
@@ -16,9 +60,9 @@
 			<div class="sorttext-center">
 				<table class="table">
 					<tr>
-						<td>{{ knp_pagination_sortable(pagination, "Pièces", "rooms") }}</td>
-						<td>{{ knp_pagination_sortable(pagination, "Surface", "surface") }}</td>
-						<td>{{ knp_pagination_sortable(pagination, "Prix", "price") }}</td>
+						<td>{{ knp_pagination_sortable(pagination, "Pièces", "p.rooms") }}</td>
+						<td>{{ knp_pagination_sortable(pagination, "Surface", "p.surface") }}</td>
+						<td>{{ knp_pagination_sortable(pagination, "Prix", "p.price") }}</td>
 					</tr>
 				</table>
 			</div>
