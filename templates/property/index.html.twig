@@ -12,7 +12,9 @@
 					<img src="https://fakeimg.pl/300/" class="card-img-top" alt="{{property.title}}">
 					<div class="card-body">
 						<h5 class="card-title">{{property.title}}</h5>
-						<p class="card-text">{{property.getSubContent}}</p>
+                        <p class="card-text">nb de pièces: {{property.rooms}}</p>
+                        <p class="card-text">Surface: {{property.surface}} m2</p>
+                        <p class="card-text">Prix: {{property.price |number_format()}}€</p>
 						<a href="#" class="btn btn-primary">Voir le bien</a>
 					</div>
 				</div>
