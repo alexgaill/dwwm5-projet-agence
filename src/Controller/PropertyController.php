@@ -21,4 +21,18 @@ class PropertyController extends AbstractController
             "properties" => $properties,
         ]);
     }
+
+    /**
+     * @Route("/properties", name="properties")
+     *
+     * @return Response
+     */
+    public function biens (): Response
+    {
+        $properties = $this->getDoctrine()->getRepository(Property::class)->findBy(["sell" => false]);
+
+        return $this->render("property/properties.html.twig", [
+            "properties" => $properties
+        ]);
+    }
 }
