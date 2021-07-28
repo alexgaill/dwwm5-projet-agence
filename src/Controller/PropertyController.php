@@ -3,9 +3,11 @@
 namespace App\Controller;
 
 use App\Entity\Property;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Knp\Component\Pager\PaginatorInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class PropertyController extends AbstractController
 {
@@ -27,12 +29,13 @@ class PropertyController extends AbstractController
      *
      * @return Response
      */
-    public function biens (): Response
+    public function biens (PaginatorInterface $paginator, Request $request): Response
     {
         $properties = $this->getDoctrine()->getRepository(Property::class)->findBy(["sell" => false]);
 
+        $pagination = $paginator->paginate($properties, $request->query->getInt("page", 1), 8);
         return $this->render("property/properties.html.twig", [
-            "properties" => $properties
+            "pagination" => $pagination
         ]);
     }
 }

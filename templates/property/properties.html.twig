@@ -7,7 +7,10 @@
 		<h1 class="mt-5 text-center">Retrouvez tous nos biens disponible ici</h1>
 		<div id="filters"></div>
 		<div class="mt-3 row wrap">
-			{% for property in properties %}
+            <div class="count">
+                <p class="h6">Nombre de biens disponibles: <span class="text-success">{{pagination.getTotalItemCount}} </span></p>
+            </div>
+			{% for property in pagination %}
 				<div class="card m-3" style="width: 18rem;">
 					<img src="https://fakeimg.pl/300/" class="card-img-top" alt="{{property.title}}">
 					<div class="card-body">
@@ -19,6 +22,9 @@
 			{% else %}
 				<h2 class="h1">Nous n'avons aucun bien à vous proposer pour le moment</h2>
 			{% endfor %}
+            <div class="navigation mx-auto col-2">
+                {{ knp_pagination_render(pagination) }}
+            </div>
 		</div>
 	</div>
 {% endblock %}
