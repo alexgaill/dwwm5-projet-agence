@@ -19,7 +19,9 @@
 					{% endfor %}
 				</div>
 			</div>
-			<div class="col-5" id="form"></div>
+			<div class="col-5" id="form">
+                {{ form(form) }}
+            </div>
 		</div>
 		<div class="mt-3 row">
 			<div class="col-7">
@@ -28,7 +30,7 @@
 			</div>
 			<div class="col-5 row">
 				<div class="col-6">
-					{% if property.transactionType %}
+					{% if not property.transactionType %}
 						<p class="h4 text-primary">Achat</p>
 					{% else %}
 						<p class="h4 text-primary">Location</p>

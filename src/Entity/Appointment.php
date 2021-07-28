@@ -26,9 +26,7 @@ class Appointment
 
     /**
      * @ORM\Column(type="datetime")
-     * @Assert\DateTime
      * @Assert\NotBlank
-     * 
      */
     private $appointmentDate;
 

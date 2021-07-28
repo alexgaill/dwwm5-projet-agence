@@ -2,7 +2,9 @@
 
 namespace App\Controller;
 
+use App\Entity\Appointment;
 use App\Entity\Property;
+use App\Form\AppointmentType;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -55,10 +57,25 @@ class PropertyController extends AbstractController
      * @param Property $property
      * @return Response
      */
-    public function single (Property $property): Response
+    public function single (Property $property, Request $request): Response
     {
+        $appointment = new Appointment;
+        $form = $this->createForm(AppointmentType::class, $appointment);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $appointment = $form->getData();
+            $appointment->setEmployee($property->getEmployee())
+                        ->setProperty($property);
+            dump($appointment);
+            $manager = $this->getDoctrine()->getManager();
+            $manager->persist($appointment);
+            $manager->flush();
+        }
+
         return $this->render("property/single.html.twig", [
-            "property" => $property
+            "property" => $property,
+            "form" => $form->createView()
         ]);
     }
 }
