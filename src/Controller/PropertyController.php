@@ -48,4 +48,17 @@ class PropertyController extends AbstractController
             "filter" => $request->query->all()
         ]);
     }
+
+    /**
+     * @Route("/property/{id}", name="singleProperty")
+     *
+     * @param Property $property
+     * @return Response
+     */
+    public function single (Property $property): Response
+    {
+        return $this->render("property/single.html.twig", [
+            "property" => $property
+        ]);
+    }
 }

@@ -79,7 +79,7 @@
 								m2</p>
 							<p class="card-text">Prix:
 								{{property.price |number_format()}}€</p>
-							<a href="#" class="btn btn-primary">Voir le bien</a>
+							<a href="{{ path('singleProperty', {id:property.id}) }}" class="btn btn-primary">Voir le bien</a>
 						</div>
 					</div>
 				{% else %}
