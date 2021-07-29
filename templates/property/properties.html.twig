@@ -33,13 +33,13 @@
 					<tbody>
 						<tr>
 							<td>
-                            <input type="number" name="roomsMin" id="roomsMin" value="{{ filter.roomsMin }}">
+                            <input type="number" name="roomsMin" id="roomsMin" value="{{ filter.roomsMin | default('') }}">
                             </td>
-							<td><input type="number" name="roomsMax" id="roomsMax" value="{{ filter.roomsMax }}"></td>
-							<td><input type="number" name="surfaceMin" id="surfaceMin" value="{{ filter.surfaceMin }}"></td>
-							<td><input type="number" name="surfaceMax" id="surfaceMax" value="{{ filter.surfaceMax }}"></td>
-							<td><input type="number" name="priceMin" id="priceMin" value="{{ filter.priceMin }}"></td>
-							<td><input type="number" name="priceMax" id="priceMax" value="{{ filter.priceMax }}"></td>
+							<td><input type="number" name="roomsMax" id="roomsMax" value="{{ filter.roomsMax | default('') }}"></td>
+							<td><input type="number" name="surfaceMin" id="surfaceMin" value="{{ filter.surfaceMin | default('') }}"></td>
+							<td><input type="number" name="surfaceMax" id="surfaceMax" value="{{ filter.surfaceMax | default('') }}"></td>
+							<td><input type="number" name="priceMin" id="priceMin" value="{{ filter.priceMin | default('') }}"></td>
+							<td><input type="number" name="priceMax" id="priceMax" value="{{ filter.priceMax | default('') }}"></td>
 						</tr>
 						<tr>
 							<td colspan="6" class="text-center">

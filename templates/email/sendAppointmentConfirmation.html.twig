@@ -1,0 +1,21 @@
+{% extends "base.html.twig" %}
+
+{% block main %}
+    <div class="container">
+        <h1 class="mt-3">Merci pour votre réservation</h1>
+        <p>Votre rendez-vous est confirmé pour la visite de <strong>{{property.title}}</strong></p>
+
+        {% if property.pictures is not empty %}
+            <img src="{{ asset('img/properties/' ~ property.pictures.0.name) }}" alt="">
+        {% else %}
+            <img src="https://fakeimg.pl/200x150" alt="">
+        {% endif %}
+
+        <p>Date du rendez-vous: <strong>{{ appointment.appointmentDate | date('d/m/Y h:i:s')}}</strong></p>
+        <p>Retrouvez-nous à l'adresse suivante: <strong>{{ property.address }}, {{ property.zipcode }}, {{ property.city }}</strong></p>
+
+        <p>L'agent <strong>{{ property.employee.firstname }} {{ property.employee.lastname }}</strong> sera votre correspondant pour cette visite.</p>
+
+        <p>A très vite chez Agency</p>
+    </div>
+{% endblock %}

@@ -6,6 +6,8 @@ use App\Entity\Appointment;
 use App\Entity\Property;
 use App\Form\AppointmentType;
 use Knp\Component\Pager\PaginatorInterface;
+use Swift_Mailer;
+use Swift_Message;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -57,20 +59,40 @@ class PropertyController extends AbstractController
      * @param Property $property
      * @return Response
      */
-    public function single (Property $property, Request $request): Response
+    public function single (Property $property, Request $request, Swift_Mailer $mailer): Response
     {
         $appointment = new Appointment;
         $form = $this->createForm(AppointmentType::class, $appointment);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $appointment = $form->getData();
-            $appointment->setEmployee($property->getEmployee())
-                        ->setProperty($property);
-            dump($appointment);
-            $manager = $this->getDoctrine()->getManager();
-            $manager->persist($appointment);
-            $manager->flush();
+            try {
+                $appointment = $form->getData();
+                $appointment->setEmployee($property->getEmployee())
+                ->setProperty($property);
+                $manager = $this->getDoctrine()->getManager();
+                $manager->persist($appointment);
+                $manager->flush();
+                $this->addFlash("success", "Le rendez-vous est enregistré, vous allez recevoir un mail de confirmation."
+                );
+
+                $email = (new Swift_Message("Confirmation de rendez-vous pour visite du bien ".$property->getTitle()))
+                        ->setFrom("no-reply@agency.fr")
+                        ->setTo($appointment->getEmail())
+                        ->setCc($property->getEmployee()->getEmail())
+                        ->setBody(
+                            $this->renderView(
+                                'email/sendAppointmentConfirmation.html.twig',
+                                [
+                                    "appointment" => $appointment,
+                                    "property" => $property
+                                ]
+                            )
+                        );
+                $mailer->send($email);
+            } catch (\Throwable $th) {
+                $this->addFlash("danger", "Le rendez-vous n'a pas pu être pris, merci de réessayer.");
+            }
         }
 
         return $this->render("property/single.html.twig", [
