@@ -1,49 +1,65 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Agency{% endblock %}</title>
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-        <link rel="stylesheet" href="{{asset('css/style.css')}}">
-        {# Run `composer require symfony/webpack-encore-bundle`
-           and uncomment the following Encore helpers to start using Symfony UX #}
-        {% block stylesheets %}
-            {#{{ encore_entry_link_tags('app') }}#}
-        {% endblock %}
+	<head>
+		<meta charset="UTF-8">
+		<title>
+			{% block title %}Agency
+			{% endblock %}
+		</title>
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+		<link
+		rel="stylesheet" href="{{asset('css/style.css')}}">
+		{# Run `composer require symfony/webpack-encore-bundle`
+		           and uncomment the following Encore helpers to start using Symfony UX #}
+		{% block stylesheets %}
+			{#{{ encore_entry_link_tags('app') }}#}
+		{% endblock %}
 
-        {% block javascripts %}
-            {#{{ encore_entry_script_tags('app') }}#}
-        {% endblock %}
-    </head>
-    <body>
-        <header>
-            <nav class="navbar navbar-dark bg-dark d-flex justify-content-between">
-                <p class="h6 text-light ms-3">Un bien qui le vaut bien</p>
-                <p class="h1 text-light">Agency</p>
-                <div class="d-flex justify-content-end">
-                <ul class="nav">
-                    <li class="nav-item nav-item-light">
-                        <a href="{{ path('home') }}" class="nav-link nav-link-light">Accueil</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="{{ path('properties') }}" class="nav-link">Nos biens</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#" class="nav-link">Administration</a>
-                    </li>
-                </ul>
-                </div>
-            </nav>
-        </header>
-        <main>
-            {% block main %}{% endblock %}
-        </main>
-        <footer class="bg-dark">
-            <ul class="nav">
-                <li class="nav-item">
-                    <a href="#" class="nav-link">Nous contacter</a>
-                </li>
-            </ul>
-        </footer>
-    </body>
+		{% block javascripts %}
+			{#{{ encore_entry_script_tags('app') }}#}
+		{% endblock %}
+	</head>
+	<body>
+		<header>
+			<nav class="navbar navbar-dark bg-dark d-flex justify-content-between">
+				<p class="h6 text-light ms-3">Un bien qui le vaut bien</p>
+				<p class="h1 text-light">Agency</p>
+				<div class="d-flex justify-content-end">
+					<ul class="nav">
+						<li class="nav-item nav-item-light">
+							<a href="{{ path('home') }}" class="nav-link nav-link-light">Accueil</a>
+						</li>
+						<li class="nav-item">
+							<a href="{{ path('properties') }}" class="nav-link">Nos biens</a>
+						</li>
+						{% if is_granted('ROLE_ADMIN') %}
+							<li class="nav-item">
+								<a href="{{ path('app_logout')}}" class="nav-link">Déconnexion</a>
+							</li>
+						{% else %}
+							<li class="nav-item">
+								<a href="{{ path('app_login')}}" class="nav-link">Administration</a>
+							</li>
+						{% endif %}
+
+						{% if is_granted("ROLE_SUPERADMIN") %}
+							<li class="nav-item">
+								<a href="{{ path('app_register')}}" class="nav-link">Ajout employé</a>
+							</li>
+						{% endif %}
+					</ul>
+				</div>
+			</nav>
+		</header>
+		<main>
+			{% block main %}{% endblock %}
+		</main>
+		<footer class="bg-dark">
+			<ul class="nav">
+				<li class="nav-item">
+					<a href="#" class="nav-link">Nous contacter</a>
+				</li>
+			</ul>
+		</footer>
+	</body>
 </html>

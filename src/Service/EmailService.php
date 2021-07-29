@@ -14,8 +14,7 @@ class EmailService {
     {
         $mailer = new Swift_Mailer(new Swift_Transport);
         $controller = new AbstractController;
-        dump($controller);
-
+        
         $email = (new Swift_Message("Confirmation de rendez-vous pour visite du bien ".$property->getTitle()))
                         ->setFrom("no-reply@agency.fr")
                         ->setTo($appointment->getEmail())
