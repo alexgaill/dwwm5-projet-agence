@@ -41,6 +41,7 @@ class PropertyRepository extends ServiceEntityRepository
     public function findFilterProperties($criteria = [])
     {
         $qb = $this->createQueryBuilder('p');
+        $qb->andWhere("p.sell = false");
 
         // $qb->where() // SELECT * FROM ... WHERE ...=...
         // $qb->andWhere() // SELECT * FROM ... WHERE ...=.. AND ...=...

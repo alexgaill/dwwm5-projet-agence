@@ -56,7 +56,6 @@ class Property
     /**
      * @ORM\Column(type="integer", nullable=true)
      * @Assert\Positive
-     * @Assert\IsNull
      */
     private $floor;
 
@@ -69,7 +68,7 @@ class Property
     /**
      * @ORM\Column(type="string", length=15)
      * @Assert\NotBlank
-     * @Assert\Regex("/^\[A-Z0-9]/")
+     * @Assert\Regex("/^[A-Z0-9]+$/")
      */
     private $zipcode;
 
@@ -93,13 +92,12 @@ class Property
 
     /**
      * @ORM\Column(type="integer", nullable=true)
-     * @Assert\Positive
+     * @Assert\PositiveOrZero
      */
     private $groundSize;
 
     /**
      * @ORM\Column(type="date", nullable=true)
-     * @Assert\Date
      */
     private $dateOfConstruction;
 
